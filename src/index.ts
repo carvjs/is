@@ -1,5 +1,3 @@
-'use strict'
-
 export const { isArray } = Array
 export const { isFinite, isInteger, isSafeInteger, isNaN } = Number
 
