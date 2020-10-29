@@ -1,4 +1,4 @@
-# @carv/js
+# @carv/is
 
 Type checking utilities.
 
