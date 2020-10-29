@@ -1,6 +1,6 @@
 > Globals
 
-# @carv/is - v1.0.1
+# @carv/is - v1.1.0
 
 ## Index
 
@@ -359,7 +359,7 @@ ___
 
 *Defined in [index.ts:301](https://github.com/carvjs/is/blob/main/src/index.ts#L301)*
 
-Returns `true` if `value` is an array with a length greater than zero.
+Returns `true` if `value` is an array with a length greater than zero and all of its items match the `assertion` (if provided).
 
 **`alias`** is.nonEmptyArray
 
