@@ -260,6 +260,11 @@ export function isPlainObject(value: unknown): value is object {
 /**
  * Returns `true` if `value` is an array and all of its items match the `assertion` (if provided).
  *
+ * ```js
+ * is.array(value); // Validate `value` is an array.
+ * is.array(value, is.number); // Validate `value` is an array and all of its items are numbers.
+ * ```
+ *
  * @typeparam T item type
  * @param value to check
  * @param assertion to apply to every element

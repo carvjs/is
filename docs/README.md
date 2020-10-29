@@ -57,9 +57,14 @@ Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/
 
 ▸ **isArray**\<T>(`value`: unknown, `assertion?`: undefined \| (value: unknown) => value is T): value is T[]
 
-*Defined in [index.ts:268](https://github.com/carvjs/is/blob/main/src/index.ts#L268)*
+*Defined in [index.ts:273](https://github.com/carvjs/is/blob/main/src/index.ts#L273)*
 
 Returns `true` if `value` is an array and all of its items match the `assertion` (if provided).
+
+```js
+is.array(value); // Validate `value` is an array.
+is.array(value, is.number); // Validate `value` is an array and all of its items are numbers.
+```
 
 **`alias`** is.array
 
@@ -124,7 +129,7 @@ ___
 
 ▸ **isDate**(`value`: unknown): value is Date
 
-*Defined in [index.ts:314](https://github.com/carvjs/is/blob/main/src/index.ts#L314)*
+*Defined in [index.ts:319](https://github.com/carvjs/is/blob/main/src/index.ts#L319)*
 
 Returns `true` if `value` is a Date.
 
@@ -170,7 +175,7 @@ ___
 
 ▸ **isEmptyArray**(`value`: unknown): value is never[]
 
-*Defined in [index.ts:289](https://github.com/carvjs/is/blob/main/src/index.ts#L289)*
+*Defined in [index.ts:294](https://github.com/carvjs/is/blob/main/src/index.ts#L294)*
 
 Returns `true` if `value` is an array with a length of zero.
 
@@ -311,7 +316,7 @@ ___
 
 ▸ **isNativePromise**\<T>(`value`: unknown): value is Promise\<T>
 
-*Defined in [index.ts:372](https://github.com/carvjs/is/blob/main/src/index.ts#L372)*
+*Defined in [index.ts:377](https://github.com/carvjs/is/blob/main/src/index.ts#L377)*
 
 Returns `true` for a native promise.
 
@@ -357,7 +362,7 @@ ___
 
 ▸ **isNonEmptyArray**\<T>(`value`: unknown, `assertion?`: undefined \| (value: unknown) => value is T): value is T[]
 
-*Defined in [index.ts:301](https://github.com/carvjs/is/blob/main/src/index.ts#L301)*
+*Defined in [index.ts:306](https://github.com/carvjs/is/blob/main/src/index.ts#L306)*
 
 Returns `true` if `value` is an array with a length greater than zero and all of its items match the `assertion` (if provided).
 
@@ -510,7 +515,7 @@ ___
 
 ▸ **isPromise**\<T>(`value`: unknown): value is Promise\<T>
 
-*Defined in [index.ts:348](https://github.com/carvjs/is/blob/main/src/index.ts#L348)*
+*Defined in [index.ts:353](https://github.com/carvjs/is/blob/main/src/index.ts#L353)*
 
 Returns `true` for any object with a `.then()` and `.catch()` method.
 
@@ -538,7 +543,7 @@ ___
 
 ▸ **isPromiseLike**\<T>(`value`: unknown): value is PromiseLike\<T>
 
-*Defined in [index.ts:359](https://github.com/carvjs/is/blob/main/src/index.ts#L359)*
+*Defined in [index.ts:364](https://github.com/carvjs/is/blob/main/src/index.ts#L364)*
 
 Returns `true` for any object with a `.then()` method.
 
@@ -564,7 +569,7 @@ ___
 
 ▸ **isRegExp**(`value`: unknown): value is RegExp
 
-*Defined in [index.ts:335](https://github.com/carvjs/is/blob/main/src/index.ts#L335)*
+*Defined in [index.ts:340](https://github.com/carvjs/is/blob/main/src/index.ts#L340)*
 
 Returns `true` if `value` is a RegExp.
 
@@ -681,7 +686,7 @@ ___
 
 ▸ **isValidDate**(`value`: unknown): value is Date
 
-*Defined in [index.ts:324](https://github.com/carvjs/is/blob/main/src/index.ts#L324)*
+*Defined in [index.ts:329](https://github.com/carvjs/is/blob/main/src/index.ts#L329)*
 
 Returns `true` if `value` is a valid Date.
 
