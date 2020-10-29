@@ -5,7 +5,7 @@ Type checking utilities.
 [![License](https://flat.badgen.net/github/license/carvjs/is)](https://github.com/carvjs/is/blob/main/LICENSE)
 [![Latest Release](https://flat.badgen.net/npm/v/@carv/is?label=release)](https://www.npmjs.com/package/@carv/is)
 [![Bundle Size](https://flat.badgen.net/bundlephobia/minzip/@carv/is?icon=packagephobia&label&color=blue)](https://bundlephobia.com/result?p=@carv/is)
-[![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/@carv/is@1.0.3/dist/index.d.ts)
+[![Typescript](https://flat.badgen.net/badge/icon/included?icon=typescript&label)](https://unpkg.com/browse/@carv/is/dist/index.d.ts)
 [![Sponsor](https://flat.badgen.net/badge/sponsored%20by/Kenoxa/2980b9)](https://www.kenoxa.com)
 
 ## Installation
