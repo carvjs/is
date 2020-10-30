@@ -1,4 +1,5 @@
 export {
+  isEqual as equal,
   isType as type,
   isString as string,
   isEmptyString as emptyString,
@@ -44,6 +45,17 @@ export function isType(
     | 'function',
 ): boolean {
   return typeof value === type
+}
+
+/**
+ * Performs a [SameValueZero](https://ecma-international.org/ecma-262/7.0/#sec-samevaluezero) comparison
+ * between two values to determine if they are equivalent.
+ *
+ * **Note** SameValueZero differs from SameValue only in its treatment of `+0` and `-0`.
+ * For SameValue comparison use `Object.is()`.
+ */
+export function isEqual(value: unknown, other: unknown): boolean {
+  return value === other || (isNaN(value) && isNaN(other))
 }
 
 /**
