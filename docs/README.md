@@ -1,6 +1,6 @@
 > Globals
 
-# @carv/is - v1.1.0
+# @carv/is - v1.2.0
 
 ## Index
 
