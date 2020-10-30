@@ -4,8 +4,15 @@
 
 ## Index
 
+### Interfaces
+
+* [Predicates](interfaces/predicates.md)
+
 ### Type aliases
 
+* [MatchPredicate](README.md#matchpredicate)
+* [Matcher](README.md#matcher)
+* [Predicate](README.md#predicate)
 * [Primitive](README.md#primitive)
 
 ### Functions
@@ -17,10 +24,13 @@
 * [isDefined](README.md#isdefined)
 * [isEmptyArray](README.md#isemptyarray)
 * [isEmptyString](README.md#isemptystring)
+* [isEqual](README.md#isequal)
 * [isFinite](README.md#isfinite)
 * [isFunction](README.md#isfunction)
 * [isInfinite](README.md#isinfinite)
 * [isInteger](README.md#isinteger)
+* [isLike](README.md#islike)
+* [isMatch](README.md#ismatch)
 * [isNaN](README.md#isnan)
 * [isNativePromise](README.md#isnativepromise)
 * [isNil](README.md#isnil)
@@ -43,11 +53,35 @@
 
 ## Type aliases
 
+### MatchPredicate
+
+Ƭ  **MatchPredicate**: (value: unknown) => boolean
+
+*Defined in [index.ts:418](https://github.com/carvjs/is/blob/main/src/index.ts#L418)*
+
+___
+
+### Matcher
+
+Ƭ  **Matcher**: [Predicate](README.md#predicate) \| [Predicates](interfaces/predicates.md) \| unknown
+
+*Defined in [index.ts:416](https://github.com/carvjs/is/blob/main/src/index.ts#L416)*
+
+___
+
+### Predicate
+
+Ƭ  **Predicate**: (this: undefined, value: any, key: undefined, object: any, matcher: undefined) => unknown \| \<T>(this: T, value: any, key: string, object: any, matcher: T) => unknown
+
+*Defined in [index.ts:395](https://github.com/carvjs/is/blob/main/src/index.ts#L395)*
+
+___
+
 ### Primitive
 
 Ƭ  **Primitive**: null \| undefined \| boolean \| number \| bigint \| string \| symbol
 
-*Defined in [index.ts:175](https://github.com/carvjs/is/blob/main/src/index.ts#L175)*
+*Defined in [index.ts:189](https://github.com/carvjs/is/blob/main/src/index.ts#L189)*
 
 Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/Primitive).
 
@@ -57,7 +91,7 @@ Matches any [primitive value](https://developer.mozilla.org/en-US/docs/Glossary/
 
 ▸ **isArray**\<T>(`value`: unknown, `assertion?`: undefined \| (value: unknown) => value is T): value is T[]
 
-*Defined in [index.ts:273](https://github.com/carvjs/is/blob/main/src/index.ts#L273)*
+*Defined in [index.ts:287](https://github.com/carvjs/is/blob/main/src/index.ts#L287)*
 
 Returns `true` if `value` is an array and all of its items match the `assertion` (if provided).
 
@@ -89,7 +123,7 @@ ___
 
 ▸ **isBigInt**(`value`: unknown): value is bigint
 
-*Defined in [index.ts:168](https://github.com/carvjs/is/blob/main/src/index.ts#L168)*
+*Defined in [index.ts:182](https://github.com/carvjs/is/blob/main/src/index.ts#L182)*
 
 Returns `true` if passed `value` is a bigint.
 
@@ -109,7 +143,7 @@ ___
 
 ▸ **isBoolean**(`value`: unknown): value is boolean
 
-*Defined in [index.ts:141](https://github.com/carvjs/is/blob/main/src/index.ts#L141)*
+*Defined in [index.ts:155](https://github.com/carvjs/is/blob/main/src/index.ts#L155)*
 
 Returns `true` if passed `value` is a boolean.
 
@@ -129,7 +163,7 @@ ___
 
 ▸ **isDate**(`value`: unknown): value is Date
 
-*Defined in [index.ts:319](https://github.com/carvjs/is/blob/main/src/index.ts#L319)*
+*Defined in [index.ts:333](https://github.com/carvjs/is/blob/main/src/index.ts#L333)*
 
 Returns `true` if `value` is a Date.
 
@@ -149,7 +183,7 @@ ___
 
 ▸ **isDefined**\<T>(`value`: T): value is Exclude\<T, undefined>
 
-*Defined in [index.ts:198](https://github.com/carvjs/is/blob/main/src/index.ts#L198)*
+*Defined in [index.ts:212](https://github.com/carvjs/is/blob/main/src/index.ts#L212)*
 
 Returns `true` if passed `value` is not `undefined`.
 
@@ -175,7 +209,7 @@ ___
 
 ▸ **isEmptyArray**(`value`: unknown): value is never[]
 
-*Defined in [index.ts:294](https://github.com/carvjs/is/blob/main/src/index.ts#L294)*
+*Defined in [index.ts:308](https://github.com/carvjs/is/blob/main/src/index.ts#L308)*
 
 Returns `true` if `value` is an array with a length of zero.
 
@@ -195,7 +229,7 @@ ___
 
 ▸ **isEmptyString**(`value`: unknown): value is ""
 
-*Defined in [index.ts:63](https://github.com/carvjs/is/blob/main/src/index.ts#L63)*
+*Defined in [index.ts:77](https://github.com/carvjs/is/blob/main/src/index.ts#L77)*
 
 Returns `true` if passed `value` is a string with a length of zero.
 
@@ -211,11 +245,34 @@ Name | Type | Description |
 
 ___
 
+### isEqual
+
+▸ **isEqual**(`value`: unknown, `other`: unknown): boolean
+
+*Defined in [index.ts:59](https://github.com/carvjs/is/blob/main/src/index.ts#L59)*
+
+Performs a [SameValueZero](https://ecma-international.org/ecma-262/7.0/#sec-samevaluezero) comparison
+between two values to determine if they are equivalent.
+
+**Note** SameValueZero differs from SameValue only in its treatment of `+0` and `-0`.
+For SameValue comparison use `Object.is()`.
+
+#### Parameters:
+
+Name | Type |
+------ | ------ |
+`value` | unknown |
+`other` | unknown |
+
+**Returns:** boolean
+
+___
+
 ### isFinite
 
 ▸ **isFinite**(`value`: unknown): value is number
 
-*Defined in [index.ts:94](https://github.com/carvjs/is/blob/main/src/index.ts#L94)*
+*Defined in [index.ts:108](https://github.com/carvjs/is/blob/main/src/index.ts#L108)*
 
 Returns `true` if passed `value` is finite.
 
@@ -235,7 +292,7 @@ ___
 
 ▸ **isFunction**(`value`: unknown): value is Function
 
-*Defined in [index.ts:150](https://github.com/carvjs/is/blob/main/src/index.ts#L150)*
+*Defined in [index.ts:164](https://github.com/carvjs/is/blob/main/src/index.ts#L164)*
 
 Returns `true` if passed `value` is a function.
 
@@ -255,7 +312,7 @@ ___
 
 ▸ **isInfinite**(`value`: unknown): value is number
 
-*Defined in [index.ts:104](https://github.com/carvjs/is/blob/main/src/index.ts#L104)*
+*Defined in [index.ts:118](https://github.com/carvjs/is/blob/main/src/index.ts#L118)*
 
 Returns `true` if passed `value` is infinite (`Infinite` or `+Infinite`).
 
@@ -275,7 +332,7 @@ ___
 
 ▸ **isInteger**(`value`: unknown): value is number
 
-*Defined in [index.ts:113](https://github.com/carvjs/is/blob/main/src/index.ts#L113)*
+*Defined in [index.ts:127](https://github.com/carvjs/is/blob/main/src/index.ts#L127)*
 
 Returns `true` if the `value` passed is an integer, `false` otherwise.
 
@@ -291,11 +348,78 @@ Name | Type | Description |
 
 ___
 
+### isLike
+
+▸ **isLike**(`matcher`: [Matcher](README.md#matcher)): [MatchPredicate](README.md#matchpredicate)
+
+*Defined in [index.ts:437](https://github.com/carvjs/is/blob/main/src/index.ts#L437)*
+
+Creates a function that invokes the predicate properties of `matcher` with the corresponding property values of a given object,
+returning `true` if all predicates return truthy, else `false`.
+
+```js
+[
+ { 'a': 2, 'b': 1 },
+ { 'a': 1, 'b': 2 }
+].filter(is.like({ 'b': (n) => n > 1 }))
+// => [{ 'a': 1, 'b': 2 }]
+```
+
+**Note**: The created function is equivalent to [isMatch](README.md#ismatch) with `source` partially applied.
+
+**`alias`** is.like
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`matcher` | [Matcher](README.md#matcher) | The object of property predicates to conform to. |
+
+**Returns:** [MatchPredicate](README.md#matchpredicate)
+
+___
+
+### isMatch
+
+▸ **isMatch**(`value`: unknown, `matcher`: [Matcher](README.md#matcher)): boolean
+
+*Defined in [index.ts:462](https://github.com/carvjs/is/blob/main/src/index.ts#L462)*
+
+Checks if `value` conforms to `matcher` by invoking the predicate properties
+of `matcher` with the corresponding property values of `value`.
+
+```js
+var object = { 'a': 1, 'b': 2 };
+
+isMatch(object, { 'b': (n) => n > 1 });
+// => true
+
+isMatch(object, { 'b': (n) => n > 2 });
+// => false
+```
+
+**Note**: This method is equivalent to [isLike](README.md#islike) when `matcher` is partially applied.
+
+**`alias`** is.match
+
+#### Parameters:
+
+Name | Type | Description |
+------ | ------ | ------ |
+`value` | unknown | to inspect. |
+`matcher` | [Matcher](README.md#matcher) | to conform to. |
+
+**Returns:** boolean
+
+Returns `true` if `value` matches, else `false`.
+
+___
+
 ### isNaN
 
 ▸ **isNaN**(`value`: unknown): value is number
 
-*Defined in [index.ts:132](https://github.com/carvjs/is/blob/main/src/index.ts#L132)*
+*Defined in [index.ts:146](https://github.com/carvjs/is/blob/main/src/index.ts#L146)*
 
 Returns a Boolean `value` that indicates whether a value is the reserved value `NaN` (not a
 number).
@@ -316,7 +440,7 @@ ___
 
 ▸ **isNativePromise**\<T>(`value`: unknown): value is Promise\<T>
 
-*Defined in [index.ts:377](https://github.com/carvjs/is/blob/main/src/index.ts#L377)*
+*Defined in [index.ts:391](https://github.com/carvjs/is/blob/main/src/index.ts#L391)*
 
 Returns `true` for a native promise.
 
@@ -342,7 +466,7 @@ ___
 
 ▸ **isNil**(`value`: unknown): value is null \| undefined
 
-*Defined in [index.ts:226](https://github.com/carvjs/is/blob/main/src/index.ts#L226)*
+*Defined in [index.ts:240](https://github.com/carvjs/is/blob/main/src/index.ts#L240)*
 
 Returns `true` if value is nullish (`null` or `undefined`).
 
@@ -362,7 +486,7 @@ ___
 
 ▸ **isNonEmptyArray**\<T>(`value`: unknown, `assertion?`: undefined \| (value: unknown) => value is T): value is T[]
 
-*Defined in [index.ts:306](https://github.com/carvjs/is/blob/main/src/index.ts#L306)*
+*Defined in [index.ts:320](https://github.com/carvjs/is/blob/main/src/index.ts#L320)*
 
 Returns `true` if `value` is an array with a length greater than zero and all of its items match the `assertion` (if provided).
 
@@ -389,7 +513,7 @@ ___
 
 ▸ **isNonEmptyString**(`value`: unknown): value is string
 
-*Defined in [index.ts:72](https://github.com/carvjs/is/blob/main/src/index.ts#L72)*
+*Defined in [index.ts:86](https://github.com/carvjs/is/blob/main/src/index.ts#L86)*
 
 Returns `true` if passed `value` is a string with a length greater than zero.
 
@@ -409,7 +533,7 @@ ___
 
 ▸ **isNull**(`value`: unknown): value is null
 
-*Defined in [index.ts:216](https://github.com/carvjs/is/blob/main/src/index.ts#L216)*
+*Defined in [index.ts:230](https://github.com/carvjs/is/blob/main/src/index.ts#L230)*
 
 Returns `true` if passed `value` is `null`.
 
@@ -429,7 +553,7 @@ ___
 
 ▸ **isNumber**(`value`: unknown): value is number
 
-*Defined in [index.ts:84](https://github.com/carvjs/is/blob/main/src/index.ts#L84)*
+*Defined in [index.ts:98](https://github.com/carvjs/is/blob/main/src/index.ts#L98)*
 
 Returns `true` if passed `value` is a number excluding `NaN`.
 
@@ -451,7 +575,7 @@ ___
 
 ▸ **isObject**(`value`: unknown): value is object
 
-*Defined in [index.ts:240](https://github.com/carvjs/is/blob/main/src/index.ts#L240)*
+*Defined in [index.ts:254](https://github.com/carvjs/is/blob/main/src/index.ts#L254)*
 
 Return `true` if `value` is an object-like.
 
@@ -475,7 +599,7 @@ ___
 
 ▸ **isPlainObject**(`value`: unknown): value is object
 
-*Defined in [index.ts:250](https://github.com/carvjs/is/blob/main/src/index.ts#L250)*
+*Defined in [index.ts:264](https://github.com/carvjs/is/blob/main/src/index.ts#L264)*
 
 Return `true` if `value` is a plain object (an object created by `{}`, the `Object` constructor or one with a `[[Prototype]]` of `null`).
 
@@ -495,7 +619,7 @@ ___
 
 ▸ **isPrimitive**(`value`: unknown): value is Primitive
 
-*Defined in [index.ts:189](https://github.com/carvjs/is/blob/main/src/index.ts#L189)*
+*Defined in [index.ts:203](https://github.com/carvjs/is/blob/main/src/index.ts#L203)*
 
 Returns `true` if passed `value` is a [Primitive](README.md#primitive).
 
@@ -515,7 +639,7 @@ ___
 
 ▸ **isPromise**\<T>(`value`: unknown): value is Promise\<T>
 
-*Defined in [index.ts:353](https://github.com/carvjs/is/blob/main/src/index.ts#L353)*
+*Defined in [index.ts:367](https://github.com/carvjs/is/blob/main/src/index.ts#L367)*
 
 Returns `true` for any object with a `.then()` and `.catch()` method.
 
@@ -543,7 +667,7 @@ ___
 
 ▸ **isPromiseLike**\<T>(`value`: unknown): value is PromiseLike\<T>
 
-*Defined in [index.ts:364](https://github.com/carvjs/is/blob/main/src/index.ts#L364)*
+*Defined in [index.ts:378](https://github.com/carvjs/is/blob/main/src/index.ts#L378)*
 
 Returns `true` for any object with a `.then()` method.
 
@@ -569,7 +693,7 @@ ___
 
 ▸ **isRegExp**(`value`: unknown): value is RegExp
 
-*Defined in [index.ts:340](https://github.com/carvjs/is/blob/main/src/index.ts#L340)*
+*Defined in [index.ts:354](https://github.com/carvjs/is/blob/main/src/index.ts#L354)*
 
 Returns `true` if `value` is a RegExp.
 
@@ -589,7 +713,7 @@ ___
 
 ▸ **isSafeInteger**(`value`: unknown): value is number
 
-*Defined in [index.ts:122](https://github.com/carvjs/is/blob/main/src/index.ts#L122)*
+*Defined in [index.ts:136](https://github.com/carvjs/is/blob/main/src/index.ts#L136)*
 
 Returns `true` if the `value` passed is a safe integer.
 
@@ -609,7 +733,7 @@ ___
 
 ▸ **isString**(`value`: unknown): value is string
 
-*Defined in [index.ts:54](https://github.com/carvjs/is/blob/main/src/index.ts#L54)*
+*Defined in [index.ts:68](https://github.com/carvjs/is/blob/main/src/index.ts#L68)*
 
 Returns `true` if passed `value` is a string.
 
@@ -629,7 +753,7 @@ ___
 
 ▸ **isSymbol**(`value`: unknown): value is symbol
 
-*Defined in [index.ts:159](https://github.com/carvjs/is/blob/main/src/index.ts#L159)*
+*Defined in [index.ts:173](https://github.com/carvjs/is/blob/main/src/index.ts#L173)*
 
 Returns `true` if passed `value` is a symbol.
 
@@ -649,7 +773,7 @@ ___
 
 ▸ **isType**(`value`: unknown, `type`: \"undefined\" \| \"object\" \| \"boolean\" \| \"number\" \| \"bigint\" \| \"string\" \| \"symbol\" \| \"function\"): boolean
 
-*Defined in [index.ts:34](https://github.com/carvjs/is/blob/main/src/index.ts#L34)*
+*Defined in [index.ts:37](https://github.com/carvjs/is/blob/main/src/index.ts#L37)*
 
 #### Parameters:
 
@@ -666,7 +790,7 @@ ___
 
 ▸ **isUndefined**(`value`: unknown): value is undefined
 
-*Defined in [index.ts:207](https://github.com/carvjs/is/blob/main/src/index.ts#L207)*
+*Defined in [index.ts:221](https://github.com/carvjs/is/blob/main/src/index.ts#L221)*
 
 Returns `true` if passed `value` is `undefined`.
 
@@ -686,7 +810,7 @@ ___
 
 ▸ **isValidDate**(`value`: unknown): value is Date
 
-*Defined in [index.ts:329](https://github.com/carvjs/is/blob/main/src/index.ts#L329)*
+*Defined in [index.ts:343](https://github.com/carvjs/is/blob/main/src/index.ts#L343)*
 
 Returns `true` if `value` is a valid Date.
 

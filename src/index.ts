@@ -30,6 +30,8 @@ export {
   isPromise as promise,
   isPromiseLike as promiseLike,
   isNativePromise as nativePromise,
+  isLike as like,
+  isMatch as match,
 }
 
 export function isType(
@@ -388,4 +390,105 @@ export function isPromiseLike<T = any>(
  */
 export function isNativePromise<T = any>(value: unknown): value is Promise<T> {
   return value instanceof Promise
+}
+
+export type Predicate =
+  | ((
+      this: undefined,
+      value: any,
+      key: undefined,
+      object: any,
+      matcher: undefined,
+    ) => unknown)
+  | (<T extends Predicates>(
+      this: T,
+      value: any,
+      key: string,
+      object: any,
+      matcher: T,
+    ) => unknown)
+
+/**
+ * Defines the predicate properties to be invoked with the corresponding property values of a given object.
+ */
+export interface Predicates extends Record<string | number | symbol, Matcher> {}
+
+export type Matcher = Predicate | Predicates | unknown
+
+export type MatchPredicate = (value: unknown) => boolean
+
+/**
+ * Creates a function that invokes the predicate properties of `matcher` with the corresponding property values of a given object,
+ * returning `true` if all predicates return truthy, else `false`.
+ *
+ * ```js
+ * [
+ *  { 'a': 2, 'b': 1 },
+ *  { 'a': 1, 'b': 2 }
+ * ].filter(is.like({ 'b': (n) => n > 1 }))
+ * // => [{ 'a': 1, 'b': 2 }]
+ * ```
+ *
+ * **Note**: The created function is equivalent to {@link isMatch} with `source` partially applied.
+ *
+ * @param matcher The object of property predicates to conform to.
+ * @alias is.like
+ */
+export function isLike(matcher: Matcher): MatchPredicate {
+  return value => match(value, matcher)
+}
+
+/**
+ * Checks if `value` conforms to `matcher` by invoking the predicate properties
+ * of `matcher` with the corresponding property values of `value`.
+ *
+ * ```js
+ * var object = { 'a': 1, 'b': 2 };
+ *
+ * isMatch(object, { 'b': (n) => n > 1 });
+ * // => true
+ *
+ * isMatch(object, { 'b': (n) => n > 2 });
+ * // => false
+ * ```
+ *
+ * **Note**: This method is equivalent to {@link isLike} when `matcher` is partially applied.
+ *
+ * @param value to inspect.
+ * @param matcher to conform to.
+ * @returns Returns `true` if `value` matches, else `false`.
+ * @alias is.match
+ */
+export function isMatch(value: unknown, matcher: Matcher): boolean {
+  return match(value, matcher)
+}
+
+function match(
+  value: unknown,
+  predicate: Matcher,
+  key?: string | undefined,
+  object?: unknown,
+  matcher?: Matcher,
+): boolean {
+  if (isEqual(value, predicate)) {
+    return true
+  }
+
+  if (isFunction(predicate)) {
+    return Boolean(predicate.call(matcher, value, key, object, matcher))
+  }
+
+  if (isObject(value) && isObject(predicate)) {
+    return Object.keys(predicate).every(key =>
+      match(
+        (value as any)[key],
+        (predicate as any)[key],
+        key,
+        value,
+        predicate,
+      ),
+    )
+  }
+
+  return false
 }
